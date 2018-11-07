@@ -2,29 +2,31 @@
 
 #region
 file_loc = 'C:/FILES/Algae/DRINKING_WATER_HISTORIC-From-Hansen-DB.csv'
-Out_loc = 'C:/FILES/Algae/'
 
 # Name of datafile for checking
-Output_filename = 'ORIGINAL-DATA'
 Output_Extension = '.csv'
 Delimiter = ','
 ChunckSize = 500
+
+# LOAD DATA
+import pandas as pd
+DataFile = pd.read_csv(file_loc, sep=Delimiter, dtype=object)
 #endregion
 
 
-# LOAD DATA
-DataFile = pd.read_csv(file_loc, sep=Delimiter, dtype=object)
-
-
 # Import Libs
-import pandas as pd
+#region
 import numpy as np
 import os
 import re
 import csv
+#endregion
 
 
 # Script
+print('FILE READ')
+NumToRemove = -1 * (len(Output_Extension))
+Output_filename = file_loc[:NumToRemove]
 Full_Filepath = Output_filename + Output_Extension
 Row_Max = int((DataFile.shape[0])-1)
 NoChuncks = Row_Max/ChunckSize
@@ -53,3 +55,5 @@ if PartialChunck == True:
     FName = Output_filename + str(counter) + Output_Extension
     df_temp=DataFile.iloc[FromRow::, :]
     df_temp.to_csv(path_or_buf=FName, sep=Delimiter, index=False)
+
+print('ALL DONE!!!!!!!!!!!!!!!!!!')
