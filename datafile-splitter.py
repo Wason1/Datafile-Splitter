@@ -1,13 +1,19 @@
 ### INPUT VALUES ####
 
-# Name of datafile
-DataFile = df_Mapped
-Output_filename = 'SOMEFILENAME'
+#region
+file_loc = 'C:/FILES/Algae/DRINKING_WATER_HISTORIC-From-Hansen-DB.csv'
+Out_loc = 'C:/FILES/Algae/'
+
+# Name of datafile for checking
+Output_filename = 'ORIGINAL-DATA'
 Output_Extension = '.csv'
 Delimiter = ','
 ChunckSize = 500
-# Export Original Data for checking
-df_Mapped.to_csv(path_or_buf=Output_filename, sep=Delimiter, index=False)
+#endregion
+
+
+# LOAD DATA
+DataFile = pd.read_csv(file_loc, sep=Delimiter, dtype=object)
 
 
 # Import Libs
